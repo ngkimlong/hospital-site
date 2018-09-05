@@ -80,6 +80,7 @@
     </div>
   </body>
   <script type="text/javascript">
+    //commnet
     axios({
       method:'get',
       url:'http://ec2-34-222-58-206.us-west-2.compute.amazonaws.com/api/v1/patient?offset=30',
