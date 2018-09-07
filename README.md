@@ -1,14 +1,18 @@
 # hospital-site
 hospital-site
 
-Install all the dependencies using composer
-composer install
+####  Install all the dependencies using composer
 
-Copy the example env file and make the required configuration changes in the .env file
-cp .env.example .env
+`composer install`
 
-Generate a new application key
-php artisan key:generate
+####  Copy the example env file and make the required configuration changes in the .env file
 
-Generate a new JWT authentication secret key
-php artisan jwt:secret
+`cp .env.example .env`
+
+####  Generate a new application key
+
+`php artisan key:generate`
+
+####  Generate a new JWT authentication secret key
+
+`php artisan jwt:secret`
