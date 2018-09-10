@@ -1,7 +1,8 @@
 // Master.js
 
 import React, {Component} from 'react';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route } from 'react-router';
+import { Link } from 'react-router-dom'
 
 class Master extends Component {
   render(){
@@ -10,7 +11,8 @@ class Master extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#">AppDividend</a>
+              <a className="navbar-brand" href="#">Robustaeng</a>
+              <Link to={`/add-item`} activeClassName="active">Add Item</Link>
             </div>
             <ul className="nav navbar-nav">
               <li className="active"><a href="#">Home</a></li>
