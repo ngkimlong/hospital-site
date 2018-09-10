@@ -16,3 +16,4 @@ hospital-site
 ####  Generate a new JWT authentication secret key
 
 `php artisan jwt:secret`
+#### test lai thay doi
