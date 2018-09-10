@@ -17,6 +17,5 @@ hospital-site
 
 `php artisan jwt:secret`
 
-#### Install npm
-
-`npm install`
+Run NPM
+npm install

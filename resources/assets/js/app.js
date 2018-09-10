@@ -4,7 +4,7 @@ require('./bootstrap');
 import React from 'react';
 import { render } from 'react-dom';
 //import { Router, Route, browserHistory } from 'react-router';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { HashRouter, Link, Route,Switch  } from 'react-router-dom';
 import Master from './components/Master';
 import CreateItem from './components/CreateItem';
 /*
@@ -17,11 +17,11 @@ render(
         document.getElementById('example'));
 */
 render (
-    <BrowserRouter>
-        <div>
-         <Route path="/" component={Master}/>
-         <Route path="/add-item" component={CreateItem}/>
-        </div> 
-    </BrowserRouter>, 
+    <HashRouter>
+      <Switch>
+        <Route path="/home" component={Master} />
+        <Route path="/add-item" component={CreateItem} />
+      </Switch>
+    </HashRouter>,
     document.getElementById('example')  
 );
