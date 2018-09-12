@@ -12,7 +12,8 @@ class Master extends Component {
           <div className="container-fluid">
             <div className="navbar-header">
               <a className="navbar-brand" href="#">Robustaeng</a>
-              <Link to={`/add-item`} activeClassName="active">Add Item</Link>
+              <Link to={`/add-item`} activeClassName="active">Add Item</Link> -  
+              <Link to={`/display-item`} activeClassName="active">Display Item</Link>
             </div>
             <ul className="nav navbar-nav">
               <li className="active"><a href="#">Home</a></li>
@@ -21,10 +22,11 @@ class Master extends Component {
               <li><a href="#">Page 3</a></li>
             </ul>
           </div>
-      </nav>
-          <div>
-              {this.props.children}
-          </div>
+        </nav>
+        
+        <div>
+            {this.props.children}
+        </div>
       </div>
     )
   }
