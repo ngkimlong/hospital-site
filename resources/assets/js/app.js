@@ -10,6 +10,7 @@ import Master from './components/Master';
 import CreateItem from './components/CreateItem';
 import DisplayItem from './components/DisplayItem';
 import EditItem from './components/EditItem';
+import ShowStt from './components/ShowStt';
 
 const history = createBrowserHistory();
 
@@ -19,7 +20,8 @@ render (
         <Route path="/home" component={Master} />
         <Route path="/add-item" component={CreateItem} />
         <Route path="/display-item" component={DisplayItem} />
-        <Route path='/edit-item/:id' component={EditItem} />
+        <Route path="/edit-item/:id" component={EditItem} />
+        <Route path="/show-stt" component={ShowStt} />
       </Switch>
     </HashRouter>,
     document.getElementById('example')  

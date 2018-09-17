@@ -13,7 +13,8 @@ class Master extends Component {
             <div className="navbar-header">
               <a className="navbar-brand" href="#">Robustaeng</a>
               <Link to={`/add-item`} activeClassName="active">Add Item</Link> -  
-              <Link to={`/display-item`} activeClassName="active">Display Item</Link>
+              <Link to={`/display-item`} activeClassName="active">Display Item</Link> - 
+              <Link to={`/show-stt`} activeClassName="active">Show STT</Link>
             </div>
             <ul className="nav navbar-nav">
               <li className="active"><a href="#">Home</a></li>

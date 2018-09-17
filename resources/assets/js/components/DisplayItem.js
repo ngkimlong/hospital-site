@@ -56,6 +56,7 @@ class DisplayItem extends Component {
                     <td>Email</td>
                     <td>Phone no</td>
                     <td>Action</td>
+                    <td></td>
                 </tr>
                 </thead>
                 <tbody>
