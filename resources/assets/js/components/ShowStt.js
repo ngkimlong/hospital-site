@@ -3,22 +3,6 @@ import { Router, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Welcome(props){
-    const isUutien = props.isUutien;
-    if(isUutien){
-        return <Patient />
-    }
-    return <Guest />
-}
-
-function Patient(props){
-    <h1>Xin chào, {props.patientname}</h1>
-}
-
-function Guest(props){
-    <h1>Xin chào</h1>
-}
-
 class ShowStt extends Component {
     constructor(props) {
         super(props);
@@ -28,10 +12,8 @@ class ShowStt extends Component {
             birthday: '',
             isScan: false,
             isUutien: false,
-            isStt: false,
             getStt: ''
         }
-        
     }
     
     handleChangeCard(e){
@@ -63,7 +45,7 @@ class ShowStt extends Component {
     handleBinhthuong(){
         this.setState({isUutien: true})
         this.setState({isScan: true})
-        this.setState({getStt: 'D0001'})
+        this.setState({getStt: 'C0001'})
     }
     
     handleTaikham(){
@@ -97,11 +79,10 @@ class ShowStt extends Component {
     
     render(){
         const isScan = this.state.isScan;
-        const isUutien = this.state.isUutien;
         
         if(!isScan) {
             return (
-                <div>
+                <div className="container">
                     <form onSubmit={ (e) => this.handleSubmit(e) }>
                         <label>
                             Mã Thẻ BN/Mã thẻ BHYT:
@@ -116,7 +97,7 @@ class ShowStt extends Component {
             )
         } else {
             return (
-                <div>
+                <div className="container">
                     { this.state.isUutien && 
                         <h1>Xin chào</h1>
                     }

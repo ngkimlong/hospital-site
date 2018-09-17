@@ -62736,31 +62736,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-function Welcome(props) {
-    var isUutien = props.isUutien;
-    if (isUutien) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Patient, null);
-    }
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Guest, null);
-}
-
-function Patient(props) {
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'h1',
-        null,
-        'Xin ch\xE0o, ',
-        props.patientname
-    );
-}
-
-function Guest(props) {
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'h1',
-        null,
-        'Xin ch\xE0o'
-    );
-}
-
 var ShowStt = function (_Component) {
     _inherits(ShowStt, _Component);
 
@@ -62775,10 +62750,8 @@ var ShowStt = function (_Component) {
             birthday: '',
             isScan: false,
             isUutien: false,
-            isStt: false,
             getStt: ''
         };
-
         return _this;
     }
 
@@ -62815,7 +62788,7 @@ var ShowStt = function (_Component) {
         value: function handleBinhthuong() {
             this.setState({ isUutien: true });
             this.setState({ isScan: true });
-            this.setState({ getStt: 'D0001' });
+            this.setState({ getStt: 'C0001' });
         }
     }, {
         key: 'handleTaikham',
@@ -62852,12 +62825,11 @@ var ShowStt = function (_Component) {
             var _this4 = this;
 
             var isScan = this.state.isScan;
-            var isUutien = this.state.isUutien;
 
             if (!isScan) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    null,
+                    { className: 'container' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'form',
                         { onSubmit: function onSubmit(e) {
@@ -62892,7 +62864,7 @@ var ShowStt = function (_Component) {
             } else {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    null,
+                    { className: 'container' },
                     this.state.isUutien && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'h1',
                         null,
