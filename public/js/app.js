@@ -62736,6 +62736,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+function Welcome(props) {
+    var isUutien = props.isUutien;
+    if (isUutien) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Patient, null);
+    }
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Guest, null);
+}
+
+function Patient(props) {
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h1',
+        null,
+        'Xin ch\xE0o, ',
+        props.patientname
+    );
+}
+
+function Guest(props) {
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h1',
+        null,
+        'Xin ch\xE0o'
+    );
+}
+
 var ShowStt = function (_Component) {
     _inherits(ShowStt, _Component);
 
@@ -62744,11 +62769,65 @@ var ShowStt = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (ShowStt.__proto__ || Object.getPrototypeOf(ShowStt)).call(this, props));
 
-        _this.handleClick = _this.handleClick.bind(_this);
+        _this.state = {
+            card_id: '',
+            patientname: '',
+            birthday: '',
+            isScan: false,
+            isUutien: false,
+            isStt: false,
+            getStt: ''
+        };
+
         return _this;
     }
 
     _createClass(ShowStt, [{
+        key: 'handleChangeCard',
+        value: function handleChangeCard(e) {
+            this.setState({
+                card_id: e.target.value
+            });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(e) {
+            var _this2 = this;
+
+            e.preventDefault();
+            console.log(this.state.card_id);
+            var url = 'http://52.89.44.27:8009/api/v1/quetthe/' + this.state.card_id;
+            __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get(url).then(function (response) {
+                _this2.setState(response.data.data), _this2.setState({ isScan: true });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'handleUutien',
+        value: function handleUutien() {
+            this.setState({ isUutien: true });
+            this.setState({ isScan: true });
+            this.setState({ getStt: 'A0001' });
+        }
+    }, {
+        key: 'handleBinhthuong',
+        value: function handleBinhthuong() {
+            this.setState({ isUutien: true });
+            this.setState({ isScan: true });
+            this.setState({ getStt: 'D0001' });
+        }
+    }, {
+        key: 'handleTaikham',
+        value: function handleTaikham() {
+            if (this.state.isUutien) this.setState({ getStt: 'A0001' });else this.setState({ getStt: 'B0001' });
+        }
+    }, {
+        key: 'handleKhammoi',
+        value: function handleKhammoi() {
+            if (this.state.isUutien) this.setState({ getStt: 'A0001' });else this.setState({ getStt: 'C0001' });
+        }
+    }, {
         key: 'gotoHome',
         value: function gotoHome() {
             this.props.history.push('/home');
@@ -62756,11 +62835,11 @@ var ShowStt = function (_Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.timerID = setInterval(function () {
-                return _this2.gotoHome();
-            }, 3000);
+                return _this3.gotoHome();
+            }, 300000);
         }
     }, {
         key: 'componentWillUnmount',
@@ -62768,36 +62847,96 @@ var ShowStt = function (_Component) {
             clearInterval(this.timerID);
         }
     }, {
-        key: 'handleClick',
-        value: function handleClick() {
-            this.props.history.push('/home');
-        }
-    }, {
         key: 'render',
         value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'h1',
-                    null,
-                    'Xin ch\xE0o, Nguy\u1EC5n V\u0103n A'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'h2',
-                    null,
-                    'A001'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            var _this4 = this;
+
+            var isScan = this.state.isScan;
+            var isUutien = this.state.isUutien;
+
+            if (!isScan) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'form-group' },
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'form',
+                        { onSubmit: function onSubmit(e) {
+                                return _this4.handleSubmit(e);
+                            } },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            null,
+                            'M\xE3 Th\u1EBB BN/M\xE3 th\u1EBB BHYT:',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', onChange: function onChange(e) {
+                                    return _this4.handleChangeCard(e);
+                                } })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', className: 'btn btn-primary', value: 'Scan th\u1EBB' })
+                    ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'button',
-                        { className: 'btn btn-primary', onClick: this.handleClick },
-                        'Quay l\u1EA1i'
+                        { className: 'btn btn-primary', onClick: function onClick() {
+                                return _this4.handleUutien();
+                            } },
+                        '\u01AFu ti\xEAn'
+                    ),
+                    ' \xA0',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'button',
+                        { className: 'btn btn-primary', onClick: function onClick() {
+                                return _this4.handleBinhthuong();
+                            } },
+                        'B\xECnh th\u01B0\u1EDDng'
                     )
-                )
-            );
+                );
+            } else {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    null,
+                    this.state.isUutien && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'h1',
+                        null,
+                        'Xin ch\xE0o'
+                    ),
+                    !this.state.isUutien && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'h1',
+                        null,
+                        'Xin ch\xE0o, ',
+                        this.state.patientname
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'h2',
+                        null,
+                        this.state.getStt
+                    ),
+                    this.state.getStt.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'button',
+                        { className: 'btn btn-primary', onClick: function onClick() {
+                                return _this4.gotoHome();
+                            } },
+                        'Quay l\u1EA1i'
+                    ),
+                    this.state.getStt.length <= 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { className: 'btn btn-primary', onClick: function onClick() {
+                                    return _this4.handleTaikham();
+                                } },
+                            'T\xE1i kh\xE1m'
+                        ),
+                        ' \xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'button',
+                            { className: 'btn btn-primary', onClick: function onClick() {
+                                    return _this4.handleKhammoi();
+                                } },
+                            'Kh\xE1m m\u1EDBi'
+                        )
+                    )
+                );
+            }
         }
     }]);
 
