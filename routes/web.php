@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get('/patient', function () {
     return view('patient_index');
 });
+
