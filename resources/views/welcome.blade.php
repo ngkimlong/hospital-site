@@ -10,6 +10,7 @@
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body>
+        @csrf
         <div id="example"></div>
         <script src="{{asset('js/app.js')}}" ></script>
     </body>
