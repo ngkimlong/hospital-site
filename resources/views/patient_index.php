@@ -83,7 +83,7 @@
     //commnet
     axios({
       method:'get',
-      url:'http://ec2-34-222-58-206.us-west-2.compute.amazonaws.com/api/v1/patient?offset=30',
+      url:'http://ec2-52-89-44-27.us-west-2.compute.amazonaws.com:8007/api/v1/patient?offset=30',
       responseType:'application/json',
       //mode: 'no-cors',
       headers: {
