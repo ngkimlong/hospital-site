@@ -7,6 +7,9 @@ import { render } from 'react-dom';
 import { HashRouter, Link, Route,Switch  } from 'react-router-dom';
 import Master from './components/Master';
 import CreateItem from './components/CreateItem';
+import ManHinhStt from './components/ManHinhSTT';
+import WelcomeForm from './components/WelcomeForm';
+import ShowStt from './components/ShowStt'
 /*
 render(
   <Router history={browserHistory}>
@@ -21,6 +24,9 @@ render (
       <Switch>
         <Route path="/home" component={Master} />
         <Route path="/add-item" component={CreateItem} />
+        <Route path="/man-hinh-stt" component={ManHinhStt}/>
+        <Route path="/scan-the" component={WelcomeForm}/>
+        <Route path="/lay-stt" component={ShowStt}/>
       </Switch>
     </HashRouter>,
     document.getElementById('example')  

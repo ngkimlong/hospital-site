@@ -11,6 +11,7 @@ class WelcomeForm extends Component {
             loaibenhanid:'',
             patientid:'',
             hosobenhanid:'',
+            age:'',
             }
     }
     
@@ -28,7 +29,7 @@ class WelcomeForm extends Component {
              
                 axios({
                           method:'get',
-                          url:'http://52.89.44.27:8009/api/v1/quetthe/'+this.props.location.state.card_id,
+                          url:'http://52.89.44.27:8009/api/v1/dontiep/quetthe/'+ this.props.location.state.card_id,
                           responseType:'application/json',
                           //mode: 'no-cors',
                           headers: {
@@ -50,18 +51,58 @@ class WelcomeForm extends Component {
                console.log(error);
              });
      }
-    
+     handleTaikham(){
+         
+     }
+    handleKhammoi(){
+        //if(this.state.isUutien)
+            //this.setState({getStt: 'A0001'})
+        //else
+            //this.setState({getStt: 'C0001'})
+            axios({
+                          method:'get',
+                          url:'http://52.89.44.27:8009/api/v1/dontiep/laysttkm/' + this.state.age,
+                          //responseType:'application/json',
+                          //mode: 'no-cors',
+                          headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                          },
+                          //withCredentials: true,
+                          //credentials: 'same-origin',
+                          
+                        })
+                  .then(res => {
+                    //const userList = res.data.data;
+                    //this.setState({ userList });
+                    this.setState(res.data);
+                    //console.log(res.data);
+                        this.props.history.push({
+                          pathname: '/lay-stt',
+                          state: {
+                            stt: this.state.so_thu_tu,
+                            patient_name: this.state.patientname,
+                            patient_id: this.state.patientid,
+                          }
+                        })
+                  })
+              
+             .catch(function (error) {
+               console.log(error);
+             });
+    }
     componentWillUnmount(){
         clearInterval(this.timerID);
     }
     renderElement(){
            if(this.state.patientname != '')
-              return <h1>Xin chào,{this.state.patientname} </h1>;
+              return <h1>Xin chào,{this.state.patientname}</h1>;
            return null;
         }
     _renderButton () {
     if (this.state.loaibenhanid == 24) {
-        return <button className="btn btn-primary" onClick={() => this.gotoHome()}>Tái Khám</button>
+        return <button className="btn btn-primary" onClick={() => this.handleTaikham()}>Tái Khám</button>
     }
          return null
         }    
@@ -74,15 +115,10 @@ class WelcomeForm extends Component {
                     <div>
                             
                   { this.renderElement() }
-                                
-                            
-                
-                        
-                
-                        <div className="form-group">
-                            <input type="hidden" value={this.state.loaibenhanid} />
+                    <div className="form-group">
+                            <input type="hidden" value={this.state.patientid} />
                             {this._renderButton ()}
-                            <button className="btn btn-primary" onClick={() => this.gotoHome()}>Khám mới</button>
+                            <button className="btn btn-primary" onClick={() => this.handleKhammoi()}>Khám mới</button>
                         </div>
                     </div>
                 )

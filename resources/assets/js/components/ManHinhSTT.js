@@ -1,20 +1,32 @@
 import React, {Component} from 'react';
-import { Router, Route } from 'react-router';
+import { Router, Route, withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 
 
 
 class ManHinhStt extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            card_id: '',
-            patientname: '',
-            birthday: '',
-            isScan: false,
-            isUutien: false
-        }
+        //this.state = {
+            //id: '',
+            //loai_stt:'',
+            //so_thu_tu:'',
+            //trang_thai:'',
+            //thoi_gian_phat:'',
+            //thoi_gian_goi:'',
+            //thoi_gian_ket_thuc:'',
+            //ma_so_kiosk:'',
+            //id_phong:'',
+            //id_benh_vien:'',
+            //thong_tin_so_bo:'',
+            ///};
+            this.state = {
+            so_thu_tu:'',
+            patientname:'',
+           };
+        
         
     }
     
@@ -26,17 +38,7 @@ class ManHinhStt extends Component {
     
     handleSubmit(e){
         e.preventDefault();
-        //console.log(this.state.card_id);
-        //let url = 'http://52.89.44.27:8009/api/v1/quetthe/' + this.state.card_id;
-        //axios.get(url)
-           // .then(response => {
-            //    this.setState(response.data.data),
-            //    this.setState({isScan: true})
-           // })
-            //.catch(function (error) {
-             //   console.log(error)
-           // })
-           if(this.state.card_id.length == 15)
+        if(this.state.card_id.length == 15)
            {
            this.props.history.push({ //browserHistory.push should also work here
                 pathname: '/scan-the',
@@ -50,21 +52,93 @@ class ManHinhStt extends Component {
     }
     
     handleUutien(){
-        this.setState({isUutien: true})
+        //this.setState({isUutien: true})
+        axios({
+                          method:'get',
+                          url:'http://52.89.44.27:8009/api/v1/dontiep/laysttut',
+                          //responseType:'application/json',
+                          //mode: 'no-cors',
+                          headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                          },
+                          //withCredentials: true,
+                          //credentials: 'same-origin',
+                          
+                        })
+                  .then(res => {
+                    //const userList = res.data.data;
+                    //this.setState({ userList });
+                    this.setState(res.data);
+                    //console.log(res.data);
+                        this.props.history.push({
+                          pathname: '/lay-stt',
+                          state: {
+                            stt: this.state.so_thu_tu,
+                            patient_name: ""
+                          }
+                        })
+                  })
+              
+             .catch(function (error) {
+               console.log(error);
+             });
         
     }
-    
-    
+    handleBinhthuong(){
+        //e.preventDefault();
+        /*this.props.history.push({ //browserHistory.push should also work here
+        pathname: '/lay-stt',
+        state: {patient_name: ""}
+        });*/
+        //this.setState({
+           // stt: "C0001",
+            //patient_name: ""
+        //})
+        axios({
+                          method:'get',
+                          url:'http://52.89.44.27:8009/api/v1/dontiep/laystt',
+                          //responseType:'application/json',
+                          //mode: 'no-cors',
+                          headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                          },
+                          //withCredentials: true,
+                          //credentials: 'same-origin',
+                          
+                        })
+                  .then(res => {
+                    //const userList = res.data.data;
+                    //this.setState({ userList });
+                    this.setState(res.data);
+                    //console.log(res.data);
+                        this.props.history.push({
+                          pathname: '/lay-stt',
+                          state: {
+                            stt: this.state.so_thu_tu,
+                            patient_name: ""
+                          }
+                        })
+                  })
+              
+             .catch(function (error) {
+               console.log(error);
+             });
+        
+             }
     
     gotoHome(){
         this.props.history.push('/home');
     }
     
     componentDidMount(){
-        this.timerID = setInterval(
-            () => this.gotoHome(),
-            300000
-        );
+        //this.timerID = setInterval(
+            //() => this.gotoHome(),
+            //300000
+        //);
     }
     
     componentWillUnmount(){
@@ -86,7 +160,7 @@ class ManHinhStt extends Component {
                     </form>
                     
                     <button className="btn btn-primary" onClick={() => this.handleUutien()}>Ưu tiên</button>
-                    <button className="btn btn-primary" onClick={() => this.handleBinhthuong()}>Bình thường</button>
+                    <button className="btn btn-primary" onClick={(e) => this.handleBinhthuong()}>Bình thường</button>
                 </div>
             )
         //} else {
