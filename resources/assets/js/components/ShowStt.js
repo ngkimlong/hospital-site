@@ -10,7 +10,12 @@ class ShowStt extends Component {
             so_thu_tu:'',
             patientname:'',
            };
-       
+                    var today = new Date(),
+            //date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            date = today.getDate() + '/' + today.getMonth() + '/' + today.getFullYear() + ' '+'-' +' ' + today.getHours() + ':' + today.getMinutes();
+        this.state = {
+            date: date
+        };
     }
     
     gotoHome(){
@@ -18,10 +23,10 @@ class ShowStt extends Component {
     }
     
     componentDidMount() {
-        //this.timerID = setInterval(
-           // () => this.gotoHome(),
-            //3000
-        //);
+        this.timerID = setInterval(
+            () => this.gotoHome(),
+            3000
+        );
          /*axios({
                           method:'get',
                           url:'http://52.89.44.27:8009/api/v1/dontiep/laystt',
@@ -48,34 +53,86 @@ class ShowStt extends Component {
              });*/
        
     }
-    
+    renderName(){
+           /*if(this.props.location.state.patient_name != '')
+           {
+              return <h1>Xin chào,{this.props.location.state.patient_name}</h1>;
+           }
+           else
+           {
+           return <h1>Xin chào</h1>
+           }*/
+        }
     componentWillUnmount(){
         clearInterval(this.timerID);
     }
-    renderName(){
-           if(this.props.location.state.patient_name != '')
-              return <h1>Xin chào,{this.props.location.state.patient_name} </h1>;
-           return null;
-        }
-    renderSTT()
-    {
-        //if(this.state.so_thu_tu != "")
-        //{
-          //  <h2>{this.state.so_thu_tu}</h2>
-        //}
-    }
+    
     render(){
+        //const isScan = this.state.isScan;
         return (
-            <div>
                 
-                { this.renderName() }
-                <h2>{this.props.location.state.stt}</h2>
-                <input type="hidden" value={this.props.location.state.patient_id} />
-                <div className="form-group">
-                    <button className="btn btn-primary" onClick={() => this.gotoHome()}>Quay lại</button>
-                </div>
-            </div>
-        )
+                      <div>
+                            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div className="container header">
+        <a className="navbar-brand" href="#">
+          <img src="https://uphinhnhanh.com/images/2018/09/27/LOGOBVXA.jpg"  height="100" alt=""/>
+        </a>
+      
+       
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+			 
+				<h1 className="mt-5">QUÉT MÃ SỐ BỆNH NHÂN</h1>      
+				
+			  
+         
+        </div>
+      </div>
+    </nav>
+    <div className="container">
+
+      <form className="form-signin">
+        
+      </form>
+
+    </div> 
+
+	<footer id="Footer" className="clearfix">
+		<div className="widgets_wrapper" >
+			<div className="container">
+			<h1 className="footer-title">Bắt đầu in</h1>
+			</div>
+		</div>
+		<div className="STT">
+		    <div className="container">
+			    <div id="AlertDiv"><h1 className="STT-text">{this.props.location.state.so_thu_tu}</h1></div>
+			</div>
+		</div>
+		<div className="TB">
+		    <div className="container">
+		        <div id="AlertDiv1"><h1 className="alert-text">Xin vui lòng chờ gọi</h1></div>
+		    </div>
+		</div>
+		<div className="footer_copy">
+			<div className="container footer-container">
+				<div className="column one-second">
+					<h2 className="footer-time" id="Time-Console">{this.state.date}</h2>
+				
+					
+				</div>
+				<div className="column one-second-right marquee">
+				
+					<div className='marquee-text'><h2 className="footer-time">CHÀO MỪNG BẠN ĐẾN VỚI BỆNH VIỆN XUYÊN Á</h2></div>
+				</div>
+			</div>
+		</div>
+	</footer>
+    
+    
+
+                        </div> 
+                    
+            )
+        
     }
 }
 export default ShowStt;
